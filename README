@@ -1,0 +1,21 @@
+This file describes how the figures were generated in the corresponding 
+manuscript.
+
+# FIGURE 1
+
+Panel A is simply a conceptual figure. The image was made in powerpoint.
+
+Panels B, C, and D were made in R, using simulated (C) and real (B & D) data. 
+The code to make these plots is available in the file 'scripts/'  
+
+# FIGURE 2
+
+# FIGURE 3
+
+# FIGURE 4
+
+# FIGURE 5
+
+# FIGURE 6
+
+Rscript to print out the density/disease data from the real transect is here: ~/Dropbox/Transect\ Simulation/R/PLOT.DENS.PREV.LHU.R
