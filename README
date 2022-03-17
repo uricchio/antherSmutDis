@@ -1,21 +1,58 @@
 This file describes how the figures were generated in the corresponding 
-manuscript.
+manuscript. Note that to get these analyses to run you will need some required 
+packages in R and Python (generally loaded at the top of the corresponding 
+script). You will also need to change file paths to correspond to the 
+appropriate local directory.
+
+Feel free to direct any questions to Lawrence.Uricchio@tufts.edu.
 
 # FIGURE 1
-
 Panel A is simply a conceptual figure. The image was made in powerpoint.
 
 Panels B, C, and D were made in R, using simulated (C) and real (B & D) data. 
-The code to make these plots is available in the file 'scripts/'  
+The code to make these plots is available in the file 
+'plottingScripts/Fig1.New.R'  
+
+To remake the data you can run the script 'make_example_data.sh'. 
 
 # FIGURE 2
+The analyses for this plot are found in 'plottingScripts/Fig2.New.R'. 
+
+The corresponding data are stored in 'data/Transect_1_all.csv'
 
 # FIGURE 3
+The analyses for this plot are found in 'plottingScripts/Fig3.New.R'. 
+
+The corresponding data are stored in 'data/Transect_1_all.csv'
 
 # FIGURE 4
+The analyses for this plot are found in 'plottingScripts/Fig4.New.R'.
+
+The corresponding data are stored in 'data/Transect_1_all.csv'
 
 # FIGURE 5
+The analyses for this plot are found in 'plottingScripts/Fig5.New.R'.
+
+To remake the simulation data, run 
+
+'python setup.py install --user' 
+
+from the top level directory (you may need to install some additional Python 
+packages), and then do
+
+'./makeTheorExpSims.sh'
+
 
 # FIGURE 6
+The analyses for this plot are found in 'plottingScripts/Fig5.New.R'.
 
-Rscript to print out the density/disease data from the real transect is here: ~/Dropbox/Transect\ Simulation/R/PLOT.DENS.PREV.LHU.R
+To remake the simulation data, run
+
+'python setup.py install --user' if you haven't already installed the software.
+
+from the top level directory (you may need to install some additional Python
+packages), and then do
+
+'./run_rand_sims.sh'
+
+
