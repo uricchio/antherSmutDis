@@ -7,7 +7,7 @@ from scipy.optimize import brute
 
 class simsInf:
 
-    def __init__(self,readQ = True, determ = False,betaF_fac=1.,betaVJ_fac=1.):
+    def __init__(self,readQ = True, determ = False,betaF_fac=1.,betaVJ_fac=1.,migSeeds=0.1,migSpores=0.1):
 
         self.readQ = readQ
         self.determ = determ
@@ -73,8 +73,8 @@ class simsInf:
         
         # UNKNOWN PARAMETERS
         self.b= 1.3                  # 1 note - this is establishment that takes into account fixed probability of seed/seedling mortality
-        self.migSeeds  = 0.1          # migration rate of seeds = fraction of seeds added to neighbors
-        self.migSpores = 0.1
+        self.migSeeds  =migSeeds          # migration rate of seeds = fraction of seeds added to neighbors
+        self.migSpores =migSpores
         self.k = 0.00015*250
 
         self.VhProb = []
