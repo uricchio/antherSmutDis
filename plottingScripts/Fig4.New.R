@@ -45,5 +45,17 @@ panel.background = element_blank(), axis.line = element_line(colour = "black"))
 
 plA
 
+summary(lm(df$y[df$year==2005]~df$x[df$year==2005],weights=df$z[df$year==2005]))
+summary(lm(df$y[df$year==2007]~df$x[df$year==2007],weights=df$z[df$year==2007]))
+summary(lm(df$y[df$year==2014]~df$x[df$year==2014],weights=df$z[df$year==2014]))
+summary(lm(df$y[df$year==2015]~df$x[df$year==2015],weights=df$z[df$year==2015]))
+summary(lm(df$y[df$year==2018]~df$x[df$year==2018],weights=df$z[df$year==2018]))
+
+
+new_line<-lm(df$y[df$year==2014]~df$x[df$year==2014],weights=df$z[df$year==2014])
+predict(new_line,data.frame(x=seq(1,27)))
+
 ggsave("/Users/uricchio/projects/bootslabOld/anther_smut/manuscript/v2/figures/Fig4.pdf",height=5,width=7)
+
+
 

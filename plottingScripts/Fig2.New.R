@@ -10,6 +10,9 @@ dat<- read.csv("data/Transect_1_all.csv", header=T)
 
 attach(dat)
 
+knots=30
+gampar=1.25
+
 
 ##DENSITY#####################################
 dens.05=round(Dp.05+HHp.05+MSp.05+Up.05,0)
@@ -94,25 +97,25 @@ plA<-ggplot(df,aes(x,y,col=year))+geom_point(alpha=0.3)+scale_color_manual(value
 
 Set.05=as.matrix(cbind(dens.05,Xplot))
 Set.05=Set.05[!is.na(Set.05[,1]),]
-mod.05 <-gam(Set.05[,1]~s(Set.05[,2]),family=poisson,gamma=0.25)
+mod.05 <-gam(Set.05[,1]~s(Set.05[,2]),family=poisson,gamma=gampar)
 predgam.05=predict.gam(mod.05);
 dfFit<-data.frame(x=unique(Set.05[,2]),y=c(t(t(unique(exp(predgam.05))))),year=rep("2005",length(unique(Set.05[,2]))))
 
 Set.07=as.matrix(cbind(dens.07,Xplot))
 Set.07=Set.07[!is.na(Set.07[,1]),]
-mod.07 <-gam(Set.07[,1]~s(Set.07[,2]),family=poisson,gamma=0.25)  #unused model parameters:  ,bs="cr",k=20
+mod.07 <-gam(Set.07[,1]~s(Set.07[,2]),family=poisson,gamma=gampar)  #unused model parameters:  ,bs="cr",k=20
 predgam.07=predict.gam(mod.07); #lines(Set.07[,2], exp(predgam.07),col="black",lwd=2)
 dfFit<-rbind(dfFit,data.frame(x=unique(Set.07[,2]),y=c(t(t(unique(exp(predgam.07))))),year=rep("2007",length(unique(Set.07[,2])))))
 	
-mod.14 <-gam(dens.14~s(Xplot),family=poisson,gamma=0.25) 
+mod.14 <-gam(dens.14~s(Xplot),family=poisson,gamma=gampar) 
 predgam.14=predict.gam(mod.14);#lines(Xplot, exp(predgam.14),col="dark green",lwd=2)
 dfFit<-rbind(dfFit,data.frame(x=unique(Xplot),y=c(t(t(unique(exp(predgam.14))))),year=rep("2014",100)))
 
-mod.15 <-gam(dens.15~s(Xplot),family=poisson,gamma=0.25)
+mod.15 <-gam(dens.15~s(Xplot),family=poisson,gamma=gampar)
 predgam.15=predict.gam(mod.15);#lines(Xplot, exp(predgam.15),col="brown",lwd=2)
 dfFit<-rbind(dfFit,data.frame(x=unique(Xplot),y=c(t(t(unique(exp(predgam.15))))),year=rep("2015",100)))
 
-mod.18 <-gam(dens.18~s(Xplot),family=poisson,gamma=0.25)
+mod.18 <-gam(dens.18~s(Xplot),family=poisson,gamma=gampar)
 predgam.18=predict.gam(mod.18);#lines(Xplot, exp(predgam.18),col="red",lwd=2)
 dfFit<-rbind(dfFit,data.frame(x=unique(Xplot),y=c(t(t(unique(exp(predgam.18))))),year=rep("2018",100)))
 
@@ -144,8 +147,6 @@ df<-rbind(df,data.frame(x=c(1:100),y=krumr.transect[,5],year=rep("2015",100)))
 
 plB<-ggplot(df,aes(x,y,col=year))+geom_point(alpha=0.3)+scale_color_manual(values=wes_palette("Darjeeling2"))
 
-knots=30
-gampar=0.25
 
 Set.05=as.matrix(cbind(krumr.05,Xplot))
 Set.05=Set.05[!is.na(Set.05[,1]),]
@@ -199,14 +200,14 @@ prev.data=dis.data/dens.data
 
 Pset.05=cbind(Xplot,prev.data[,3],dens.data[,3])
 Pset.05=Pset.05[complete.cases(Pset.05),] 
-mod.05 <-gam(Pset.05[,2]~s(Pset.05[,1]),family=binomial(link="logit"),weights=Pset.05[,3],gamma=0.25) 
+mod.05 <-gam(Pset.05[,2]~s(Pset.05[,1]),family=binomial(link="logit"),weights=Pset.05[,3],gamma=gampar) 
 predgam.05=predict.gam(mod.05);
 back=exp(predgam.05)/(1+exp(predgam.05))
 dfFit<-data.frame(x=unique(Pset.05[,1]),y=c(t(t(unique(back)))),year=rep("2005",length(unique(Pset.05[,1]))))
 
 Pset.07=cbind(Xplot,prev.data[,4],dens.data[,4])
 Pset.07=Pset.07[complete.cases(Pset.07),] 
-mod.07 <-gam(Pset.07[,2]~s(Pset.07[,1]),family=binomial(link="logit"),weights=Pset.07[,3],gamma=0.25) 
+mod.07 <-gam(Pset.07[,2]~s(Pset.07[,1]),family=binomial(link="logit"),weights=Pset.07[,3],gamma=gampar) 
 predgam.07=predict.gam(mod.07);
 back=exp(predgam.07)/(1+exp(predgam.07))
 dfFit<-rbind(dfFit,data.frame(x=unique(Pset.07[,1]),y=c(t(t(unique(back)))),year=rep("2007",length(unique(Pset.07[,1])))))
@@ -214,26 +215,26 @@ dfFit<-rbind(dfFit,data.frame(x=unique(Pset.07[,1]),y=c(t(t(unique(back)))),year
 
 Pset.14=cbind(Xplot,prev.data[,5],dens.data[,5])
 Pset.14=Pset.14[complete.cases(Pset.14),] 
-mod.14 <-gam(Pset.14[,2]~s(Pset.14[,1]),family=binomial(link="logit"),weights=Pset.14[,3],gamma=0.25) 
+mod.14 <-gam(Pset.14[,2]~s(Pset.14[,1]),family=binomial(link="logit"),weights=Pset.14[,3],gamma=gampar) 
 predgam.14=predict.gam(mod.14);
 back=exp(predgam.14)/(1+exp(predgam.14))
 dfFit<-rbind(dfFit,data.frame(x=unique(Pset.14[,1]),y=c(t(t(unique(back)))),year=rep("2014",length(unique(Pset.14[,1])))))
 
 Pset.15=cbind(Xplot,prev.data[,6],dens.data[,6])
 Pset.15=Pset.15[complete.cases(Pset.15),] 
-mod.15 <-gam(Pset.15[,2]~s(Pset.15[,1]),family=binomial(link="logit"),weights=Pset.15[,3],gamma=0.25) 
+mod.15 <-gam(Pset.15[,2]~s(Pset.15[,1]),family=binomial(link="logit"),weights=Pset.15[,3],gamma=gampar) 
 predgam.15=predict.gam(mod.15);
 back=exp(predgam.15)/(1+exp(predgam.15))
 dfFit<-rbind(dfFit,data.frame(x=unique(Pset.15[,1]),y=c(t(t(unique(back)))),year=rep("2015",length(unique(Pset.15[,1])))))
 
 Pset.18=cbind(Xplot,prev.data[,7],dens.data[,7])
 Pset.18=Pset.18[complete.cases(Pset.18),] 
-mod.18 <-gam(Pset.18[,2]~s(Pset.18[,1]),family=binomial(link="logit"),weights=Pset.18[,3],gamma=0.25) 
+mod.18 <-gam(Pset.18[,2]~s(Pset.18[,1]),family=binomial(link="logit"),weights=Pset.18[,3],gamma=gampar) 
 predgam.18=predict.gam(mod.18);
 back=exp(predgam.18)/(1+exp(predgam.18))
 dfFit<-rbind(dfFit,data.frame(x=unique(Pset.18[,1]),y=c(t(t(unique(back)))),year=rep("2018",length(unique(Pset.18[,1])))))
 
-plC<-plC+geom_line(data=dfFit,aes(x,y,col=year),size=0.8)+xlab("position (m)")+ylab(expression("disease prevalence"))+theme(legend.position="NA")+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+plC<-plC+geom_line(data=dfFit,aes(x,y,col=year),size=0.8)+xlab("position (m)")+ylab(expression("pathogen prevalence"))+theme(legend.position="NA")+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"))
 
 df <- data.frame()
@@ -248,7 +249,6 @@ row2<-plot_grid(plB,plBl,rel_widths=c(1,0.18),labels=c("B",""))
 row3<-plot_grid(plC,plBl,rel_widths=c(1,0.18),labels=c("C",""))
 
 plot_grid(plA,row2,row3,labels=c("A","",""),ncol=1)
-
 
 ggsave("/Users/uricchio/projects/bootslabOld/anther_smut/manuscript/v2/figures/Fig2.pdf",width=7,height=11)
 #ggsave("~/Documents/CV/app/2019/boise/ConceptFigPlotsForApp.pdf",width=7,height=11*2/3)

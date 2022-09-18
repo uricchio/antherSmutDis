@@ -1,5 +1,5 @@
 
-# max change in abundance / year in data is (1409-504)/(18-14) = 226.25
+# max change in abundance / year of Flowering plants in data is (1409-504)/(18-14) = 226.25
 library(ggplot2)
 library(cowplot)
 library(wesanderson)
@@ -14,7 +14,7 @@ plotAndGetMaxSlope<-function(i) {
   #scan(paste("/Users/uricchio/projects/bootslabOld/anther_smut/simAnthSmut/simsRepGenRandHigh/sim.",i,".txt",sep=""),nlines=1,what=c("a"))->params
 
   
-  # if epidemic is shorter than actual, skip
+  # if epidemic is shorter than actual data we recorded, skip this replicate
   if(length(t$V1) < 10 ) {
   	return (NA)
   }
