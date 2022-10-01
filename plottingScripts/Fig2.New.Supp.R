@@ -10,6 +10,8 @@ dat<- read.csv("data/Transect_1_all.csv", header=T)
 
 attach(dat)
 
+knots=15
+gampar=1.25
 
 ##DENSITY#####################################
 dens.05=round(Dp.05+HHp.05+MSp.05+Up.05,0)
@@ -144,8 +146,7 @@ df<-rbind(df,data.frame(x=c(1:100),y=krumr.transect[,5],year=rep("2015",100)))
 
 plB<-ggplot(df,aes(x,y,col=year))+geom_point(alpha=0.3)+scale_color_manual(values=wes_palette("Darjeeling2"))
 
-knots=30
-gampar=1.25
+
 
 Set.05=as.matrix(cbind(krumr.05,Xplot))
 Set.05=Set.05[!is.na(Set.05[,1]),]
