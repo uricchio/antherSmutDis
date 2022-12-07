@@ -21,7 +21,7 @@ The analyses for this plot are found in 'plottingScripts/Fig2.New.R'.
 The corresponding data are stored in 'data/Transect_1_all.csv'
 
 # FIGURE 3
-The analyses for this plot are found in 'plottingScripts/Fig3.New.R'. 
+The analyses for this plot are found in 'plottingScripts/Fig3.New.Lin.R'. 
 
 The corresponding data are stored in 'data/Transect_1_all.csv'
 
@@ -44,7 +44,7 @@ packages), and then do
 
 
 # FIGURE 6
-The analyses for this plot are found in 'plottingScripts/Fig5.New.R'.
+The analyses for this plot are found in 'plottingScripts/Fig6.New.R'.
 
 To remake the simulation data, run
 
